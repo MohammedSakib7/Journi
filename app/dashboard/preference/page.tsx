@@ -1,21 +1,26 @@
-export default function Preference(){
-    return(
-        <div>
-            <h1>Preference</h1>
-            <form>
-                <label>
-                    <input type="radio" value="1" name="preference" />
-                    Preference 1
-                </label>
-                <label>
-                    <input type="radio" value="2" name="preference" />
-                    Preference 2
-                </label>
-                <label>
-                    <input type="radio" value="3" name="preference" />
-                    Preference 3
-                </label>
-                <button type="submit">Submit</button>
+'use client';
+import PForm from "@/app/ui/pForm";
+import React from "react";
+
+interface PreferenceProps {
+    formdata: any; // Replace 'any' with a more specific type if possible
+}
+
+export default function Preference({ formdata }: PreferenceProps) {
+    async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+
+        // Get the value of a specific input field
+        const destinationValue = formData.get('destination') as string | null;
+
+        console.log('Destination:', destinationValue);
+    }
+
+    return (
+        <div className="flex items-center justify-center min-h-screen">
+            <form onSubmit={onSubmit}>
+                <PForm />
             </form>
         </div>
     );
