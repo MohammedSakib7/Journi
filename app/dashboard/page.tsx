@@ -16,7 +16,6 @@ export default function Dashboard() {
     // Handle the city selection (e.g., update state or navigate to a different page)
     console.log('Selected city:', city);
   };
-
   return (
     <div className="w-full max-w-3xl mx-auto px-3 md:px-4 py-6">
       <CitySearch fetchCities={fetchCitiesFromBackend}/>

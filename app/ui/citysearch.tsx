@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 
 interface City {
@@ -16,6 +17,7 @@ interface CitySearchProps {
 const CitySearch = ({ fetchCities }: CitySearchProps) => {
     const [cities, setCities] = useState<City[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
+    // const router = useRouter();
 
     useEffect(() => {
         if (searchTerm.length >= 3) {
@@ -32,9 +34,13 @@ const CitySearch = ({ fetchCities }: CitySearchProps) => {
 
     const handleCitySelect = (city: City) => (event: React.MouseEvent<HTMLLIElement>) => {
         // Handle the city selection
-        console.log('Selected city:', city.place_id);
-        setSearchTerm(city.description);
-        setCities([]);
+        // router.push({
+        //     pathname:"/preference",
+        //     query: {cityId: city.place_id, cityName: city.name, cityDescription: city.description}
+        // })
+        console.log(city.place_id)
+        // setSearchTerm(city.description);
+        // setCities([]);
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,9 +62,15 @@ const CitySearch = ({ fetchCities }: CitySearchProps) => {
                         <li
                             key={city.place_id} // Use place_id as the key
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={handleCitySelect(city)} // Fixed: Return a function for the event handler
+                            // onClick={handleCitySelect(city)} // Fixed: Return a function for the event handler
                         >
-                            {city.description}
+                            <Link href={{
+                                pathname: "/dashboard/preference",
+                                query: {cityId: city.place_id,
+                                cityName: city.name,
+                                cityDescription: city.description
+                            }
+                            }}>{city.description}</Link>
                         </li>
                     ))}
                 </ul>
