@@ -36,6 +36,17 @@ def get_cities():
     else:
         return jsonify({'cities': []})
 
+@app.route('/submit', methods=['POST'])
+def submit():
+    # Process form data
+    data = request.form.to_dict()
+    # Process data and return JSON response
+    processed_data = {
+        'message': 'Data processed successfully',
+        # 'originalData': data
+    }
+    return jsonify(processed_data)
+
 @app.route('/hello', methods=['GET'])
 def hello_world():
     return jsonify({'message': "Hello, World!"})
